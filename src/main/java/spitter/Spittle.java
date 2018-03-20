@@ -5,6 +5,7 @@ import lombok.*;
 import java.util.Date;
 
 @Data
+@AllArgsConstructor
 @EqualsAndHashCode(exclude = {"message", "latitude", "longitude"})
 public class Spittle {
     private final Long id;
