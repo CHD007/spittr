@@ -17,7 +17,7 @@ public class SpittleRepositoryImpl implements SpittleRepository {
 
     private List<Spittle> createSpittlesList(int count) {
         return IntStream.range(0, count)
-                .mapToObj(i -> new Spittle(Long.valueOf(i), "msg " + i, new Date(), Double.valueOf(i), Double.valueOf(i)))
+                .mapToObj(i -> new Spittle((long) i, "msg " + i, new Date(), (double) i, (double) i))
                 .collect(Collectors.toList());
     }
 }
