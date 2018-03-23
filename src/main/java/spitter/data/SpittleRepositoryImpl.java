@@ -20,4 +20,9 @@ public class SpittleRepositoryImpl implements SpittleRepository {
                 .mapToObj(i -> new Spittle((long) i, "msg " + i, new Date(), (double) i, (double) i))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public Spittle findOne(long spittleId) {
+        return new Spittle(spittleId, "hello", new Date(), 0.0, 0.0);
+    }
 }

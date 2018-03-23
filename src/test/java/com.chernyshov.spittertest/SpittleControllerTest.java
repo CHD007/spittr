@@ -61,6 +61,23 @@ public class SpittleControllerTest {
 
     }
 
+    @Test
+    public void shouldShowOneSpittle() throws Exception {
+        Spittle expectedSpittle = new Spittle("hello", new Date());
+
+        SpittleRepository spittleRepository = mock(SpittleRepository.class);
+        when(spittleRepository.findOne(12345)).thenReturn(expectedSpittle);
+
+        SpittleController spittleController = new SpittleController(spittleRepository);
+        MockMvc mockMvc = standaloneSetup(spittleController).build();
+
+        mockMvc.perform(get("/spittles/12345"))
+                .andExpect(view().name("spittle"))
+                .andExpect(model().attributeExists("spittle"))
+                .andExpect(model().attribute("spittle", expectedSpittle));
+
+    }
+
     private List<Spittle> createSpittlesList(int count) {
         return IntStream.range(0, count)
                 .mapToObj(i -> new Spittle("Spittle " + i, new Date()))
