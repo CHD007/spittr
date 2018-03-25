@@ -9,6 +9,7 @@ import spitter.web.SpitterController;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
@@ -43,5 +44,21 @@ public class SpitterControllerTest {
             .andExpect(redirectedUrl("/spitter/jbauer"));
 
         verify(repository, atLeastOnce()).save(unsavedSpitter);
+    }
+
+    @Test
+    public void shouldShowSpitterProfile() throws Exception {
+        SpitterRepository spitterRepository = mock(SpitterRepository.class);
+
+        Spitter savedSpitter = new Spitter(24L, "jbauer", "24hours", "Jack", "Bauer");
+
+        when(spitterRepository.findByUserName("jbauer")).thenReturn(savedSpitter);
+
+        SpitterController spitterController = new SpitterController(spitterRepository);
+        MockMvc mockMvc = standaloneSetup(spitterController).build();
+
+        mockMvc.perform(get("/spitter/jbauer"))
+                .andExpect(model().attribute("spitter", savedSpitter))
+                .andExpect(view().name("profile"));
     }
 }

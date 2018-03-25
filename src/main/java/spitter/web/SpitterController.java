@@ -1,8 +1,9 @@
 package spitter.web;
 
-import javafx.geometry.Pos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import spitter.Spitter;
@@ -32,5 +33,13 @@ public class SpitterController {
         spitterRepository.save(spitter);
 
         return "redirect:/spitter/" + spitter.getUserName();
+    }
+
+    @RequestMapping(value = "/{userName}", method = RequestMethod.GET)
+    public String showSpitterProfile(
+            @PathVariable String userName, Model model) {
+        Spitter spitter = spitterRepository.findByUserName(userName);
+        model.addAttribute(spitter);
+        return "profile";
     }
 }
