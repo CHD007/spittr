@@ -5,12 +5,13 @@ import lombok.*;
 import java.util.Date;
 
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(exclude = {"message", "latitude", "longitude"})
 public class Spittle {
-    private final Long id;
-    private final String message;
-    private final Date time;
+    private Long id;
+    private String message;
+    private Date time;
     private Double latitude;
     private Double longitude;
 
