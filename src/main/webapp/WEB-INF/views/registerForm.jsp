@@ -1,5 +1,6 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page session="false" contentType="text/html; charset=UTF-8" %>
 <html>
 <head>
     <title>Spittr</title>
@@ -8,12 +9,16 @@
 </head>
 <body>
 <h1>Register</h1>
-<form method="POST">
-    First Name: <input type="text" name="firstName" /><br/>
-    Last Name: <input type="text" name="lastName" /><br/>
-    Username: <input type="text" name="userName" /><br/>
-    Password: <input type="password" name="password" /><br/>
+<sf:form method="POST" modelAttribute="spitter">
+    First Name: <sf:input path="firstName" />
+    <sf:errors path="firstName" cssClass="error"/><br/>
+    Last Name: <sf:input path="lastName" />
+    <sf:errors path="lastName" cssClass="error"/><br/>
+    Username: <sf:input path="userName" />
+    <sf:errors path="userName" cssClass="error"/><br/>
+    Password: <sf:password path="password" />
+    <sf:errors path="password" cssClass="error"/><br/>
     <input type="submit" value="Register" />
-</form>
+</sf:form>
 </body>
 </html>
