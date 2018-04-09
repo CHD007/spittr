@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://www.springframework.org/tags" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
 <%--
   Created by IntelliJ IDEA.
   User: Daniil
@@ -15,7 +16,7 @@
           href="<c:url value="/resources/style.css"/>">
 </head>
 <body>
-    <h1>Welcome to Spittr</h1>
+<h1><s:message code="spitter.welcome" /></h1>
     <a href="<c:url value="/spittles" />">Spittles</a>
     <a href="<c:url value="/spitter/register" />">Register</a>
 </body>
