@@ -10,14 +10,15 @@
 <body>
 <h1>Register</h1>
 <sf:form method="POST" modelAttribute="spitter">
-    First Name: <sf:input path="firstName" />
-    <sf:errors path="firstName" cssClass="error"/><br/>
-    Last Name: <sf:input path="lastName" />
-    <sf:errors path="lastName" cssClass="error"/><br/>
-    Username: <sf:input path="userName" />
-    <sf:errors path="userName" cssClass="error"/><br/>
-    Password: <sf:password path="password" />
-    <sf:errors path="password" cssClass="error"/><br/>
+    <sf:errors path="*" element="div" cssClass="errors"/>
+    <sf:label path="firstName" cssErrorClass="error">First Name: </sf:label>
+    <sf:input path="firstName" cssErrorClass="error"/><br/>
+    <sf:label path="lastName" cssErrorClass="error">Last Name:</sf:label>
+    <sf:input path="lastName" cssErrorClass="error"/><br/>
+    <sf:label path="userName" cssErrorClass="error">Username:</sf:label>
+    <sf:input path="userName" cssErrorClass="error"/><br/>
+    <sf:label path="password" cssErrorClass="error">Password: </sf:label>
+    <sf:password path="password" cssErrorClass="error"/><br/>
     <input type="submit" value="Register" />
 </sf:form>
 </body>
