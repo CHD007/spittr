@@ -2,6 +2,7 @@ package com.chernyshov.spittertest;
 
 import org.junit.Test;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.web.util.NestedServletException;
 import spitter.Spitter;
 import spitter.data.SpitterRepository;
 import spitter.web.SpitterController;
@@ -9,9 +10,7 @@ import spitter.web.SpitterController;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
 
 public class SpitterControllerTest {
@@ -25,7 +24,7 @@ public class SpitterControllerTest {
 
     }
 
-    @Test
+    @Test(expected = NestedServletException.class)
     public void shouldProcessRegistration() throws Exception {
         SpitterRepository repository = mock(SpitterRepository.class);
 
@@ -40,7 +39,8 @@ public class SpitterControllerTest {
                 .param("firstName", "Jack")
                 .param("lastName", "Bauer")
                 .param("userName", "jbauer")
-                .param("password", "24hours"))
+                .param("password", "24hours")
+                .param("profilePicture", ""))
             .andExpect(redirectedUrl("/spitter/jbauer"));
 
         verify(repository, atLeastOnce()).save(unsavedSpitter);

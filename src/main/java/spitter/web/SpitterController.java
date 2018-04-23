@@ -7,10 +7,14 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
 import spitter.Spitter;
 import spitter.data.SpitterRepository;
 
 import javax.validation.Valid;
+import java.io.File;
+import java.io.IOException;
 
 @Controller
 @RequestMapping(value = "/spitter")
@@ -34,11 +38,14 @@ public class SpitterController {
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String proccessRegistration(
-            @Valid Spitter spitter, Errors errors) {
+            @Valid Spitter spitter,
+            @RequestPart("profilePicture") MultipartFile profilePicture,
+            Errors errors) throws IOException {
         if (errors.hasErrors()) {
             return "registerForm";
         }
 
+        profilePicture.transferTo(new File("/data/spittr/" + profilePicture.getOriginalFilename()));
         spitterRepository.save(spitter);
 
         return "redirect:/spitter/" + spitter.getUserName();
