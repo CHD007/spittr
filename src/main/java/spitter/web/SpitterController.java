@@ -45,7 +45,7 @@ public class SpitterController {
             return "registerForm";
         }
 
-        profilePicture.transferTo(new File("/data/spittr/" + profilePicture.getOriginalFilename()));
+        profilePicture.transferTo(new File("/" + profilePicture.getOriginalFilename()));
         spitterRepository.save(spitter);
 
         return "redirect:/spitter/" + spitter.getUserName();
