@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import spitter.Spittle;
 import spitter.data.SpittleRepository;
+import spitter.web.exceptions.SpittleNotFoundException;
 
 import java.util.List;
 
@@ -35,7 +36,11 @@ public class SpittleController {
     public String showSpittle(
             @PathVariable long spittleId,
             Model model) {
-        model.addAttribute(spittleRepository.findOne(spittleId));
+        Spittle spittle = spittleRepository.findOne(spittleId);
+        if (spittle == null) {
+            throw new SpittleNotFoundException();
+        }
+        model.addAttribute(spittle);
         return "spittle";
     }
 }
