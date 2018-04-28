@@ -1,11 +1,11 @@
 package spitter.data;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import spitter.Spitter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Component
 public class SpitterRepositoryImpl implements SpitterRepository {
@@ -24,9 +24,11 @@ public class SpitterRepositoryImpl implements SpitterRepository {
 
     @Override
     public Spitter findByUserName(String userName) {
-        Optional<Spitter> first = spitters.stream()
-                .filter(u -> u.getUserName().equals(userName))
-                .findFirst();
-        return first.get();
+//        Optional<Spitter> first = spitters.stream()
+//                .filter(u -> u.getUserName().equals(userName))
+//                .findFirst();
+//        return first.get();
+        return new Spitter(userName, new BCryptPasswordEncoder().encode("password"),
+                "firstName", "lastName");
     }
 }
