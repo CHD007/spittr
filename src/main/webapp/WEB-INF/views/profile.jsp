@@ -1,17 +1,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: Daniil
-  Date: 25.03.2018
-  Time: 22:15
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>User profile</title>
 </head>
 <body>
+Hello <security:authentication property="principal.username" />!
 <h1>Your Profile</h1>
 <c:out value="${spitter.userName}" /><br/>
 <c:out value="${spitter.firstName}" />
