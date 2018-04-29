@@ -2,7 +2,9 @@ package spitter.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -14,6 +16,18 @@ import spitter.security.SpitterUserService;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private SpitterRepository spitterRepository;
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.formLogin().and()
+                .authorizeRequests()
+                .antMatchers("/spitter/me").hasRole("SPITTER")
+                .antMatchers(HttpMethod.POST, "/spittles").hasRole("SPITTER")
+                .anyRequest().permitAll()
+                .and()
+                .requiresChannel()
+                .antMatchers("/spitter/form").requiresSecure();
+    }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
