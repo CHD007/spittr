@@ -19,7 +19,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.formLogin().and()
+        http.formLogin()
+                .loginPage("/login").and()
                 .authorizeRequests()
                 .antMatchers("/spitter/me").hasRole("SPITTER")
                 .antMatchers(HttpMethod.POST, "/spittles").hasRole("SPITTER")
