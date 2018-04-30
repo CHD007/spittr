@@ -1,7 +1,7 @@
 package spitter.data;
 
 import org.springframework.stereotype.Component;
-import spitter.Spittle;
+import spitter.domain.Spittle;
 
 import java.util.Date;
 import java.util.List;

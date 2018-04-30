@@ -1,4 +1,4 @@
-package spitter;
+package spitter.domain;
 
 import lombok.*;
 

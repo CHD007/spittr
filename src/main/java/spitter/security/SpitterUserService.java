@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import spitter.Spitter;
+import spitter.domain.Spitter;
 import spitter.data.SpitterRepository;
 
 import java.util.ArrayList;

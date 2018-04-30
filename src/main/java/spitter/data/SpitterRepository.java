@@ -1,6 +1,6 @@
 package spitter.data;
 
-import spitter.Spitter;
+import spitter.domain.Spitter;
 
 /**
  * The repository that contains spitters.

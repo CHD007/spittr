@@ -3,7 +3,7 @@ package com.chernyshov.spittertest;
 import org.junit.Test;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.util.NestedServletException;
-import spitter.Spitter;
+import spitter.domain.Spitter;
 import spitter.data.SpitterRepository;
 import spitter.web.SpitterController;
 

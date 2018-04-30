@@ -2,7 +2,7 @@ package spitter.data;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
-import spitter.Spitter;
+import spitter.domain.Spitter;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -3,7 +3,7 @@ package com.chernyshov.spittertest;
 import org.junit.Test;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.servlet.view.InternalResourceView;
-import spitter.Spittle;
+import spitter.domain.Spittle;
 import spitter.data.SpittleRepository;
 import spitter.web.SpittleController;
 
