@@ -1,6 +1,7 @@
 package spitter.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -21,10 +22,12 @@ import java.io.IOException;
 public class SpitterController {
 
     private SpitterRepository spitterRepository;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
-    public SpitterController(SpitterRepository spitterRepository) {
+    public SpitterController(SpitterRepository spitterRepository, PasswordEncoder passwordEncoder) {
         this.spitterRepository = spitterRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public SpitterController() {
@@ -48,6 +51,7 @@ public class SpitterController {
         if (profilePicture != null && !"".equals(profilePicture.getOriginalFilename())) {
             profilePicture.transferTo(new File("/" + profilePicture.getOriginalFilename()));
         }
+        spitter.setPassword(passwordEncoder.encode(spitter.getPassword()));
         spitterRepository.save(spitter);
 
         return "redirect:/spitter/" + spitter.getUserName();

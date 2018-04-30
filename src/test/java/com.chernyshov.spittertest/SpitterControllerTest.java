@@ -1,6 +1,8 @@
 package com.chernyshov.spittertest;
 
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.util.NestedServletException;
 import spitter.domain.Spitter;
@@ -14,6 +16,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
 
 public class SpitterControllerTest {
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Test
     public void shouldShowRegisterForm() throws Exception {
@@ -33,7 +37,7 @@ public class SpitterControllerTest {
 
         when(repository.save(unsavedSpitter)).thenReturn(savedSpitter);
 
-        SpitterController spitterController = new SpitterController(repository);
+        SpitterController spitterController = new SpitterController(repository, passwordEncoder);
         MockMvc mockMvc = standaloneSetup(spitterController).build();
         mockMvc.perform(post("/spitter/register")
                 .param("firstName", "Jack")
@@ -54,7 +58,7 @@ public class SpitterControllerTest {
 
         when(spitterRepository.findByUserName("jbauer")).thenReturn(savedSpitter);
 
-        SpitterController spitterController = new SpitterController(spitterRepository);
+        SpitterController spitterController = new SpitterController(spitterRepository, passwordEncoder);
         MockMvc mockMvc = standaloneSetup(spitterController).build();
 
         mockMvc.perform(get("/spitter/jbauer"))

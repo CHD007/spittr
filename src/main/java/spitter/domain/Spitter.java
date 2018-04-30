@@ -24,7 +24,6 @@ public class Spitter {
 
     @NonNull
     @NotNull
-    @Size(min = 5, max = 25, message = "{password.size}")
     @Column
     private String password;
 
