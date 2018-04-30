@@ -42,7 +42,7 @@ public class RootConfig {
     public DataSource dataSource() {
         BasicDataSource ds = new BasicDataSource();
         ds.setDriverClassName("com.mysql.jdbc.Driver");
-        ds.setUrl("jdbc:mysql://127.0.0.1:3306/spittrDB");
+        ds.setUrl("jdbc:mysql://127.0.0.1:3306/spittrDB?serverTimezone=UTC");
         ds.setUsername("spittr");
         ds.setPassword("spittr");
         return ds;

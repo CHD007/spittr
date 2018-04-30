@@ -6,7 +6,6 @@
     <title>User profile</title>
 </head>
 <body>
-Hello <security:authentication property="principal.username" />!
 <h1>Your Profile</h1>
 <c:out value="${spitter.userName}" /><br/>
 <c:out value="${spitter.firstName}" />
