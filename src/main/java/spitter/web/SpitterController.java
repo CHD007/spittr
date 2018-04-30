@@ -48,7 +48,7 @@ public class SpitterController {
         if (profilePicture != null && !"".equals(profilePicture.getOriginalFilename())) {
             profilePicture.transferTo(new File("/" + profilePicture.getOriginalFilename()));
         }
-        @Valid Spitter save = spitterRepository.save(spitter);
+        spitterRepository.save(spitter);
 
         return "redirect:/spitter/" + spitter.getUserName();
     }
